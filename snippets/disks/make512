@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# sgc - sgl
+#for i in {c..l}
+#do
+#    screen -dmS sg$i sg_format --format --size=512 /dev/sg$i
+#    tmux new-session -d -s sg$i "sg_format --format --size=512 /dev/sg$i"
+#    tmux new-session -d -s sd$i 'sg_format --format --size512 /dev/sd$i'
+    tmux new -s $1 -d \; setw remain-on-exit on \; respawnw -k sg_format --format --quick --size=512 --ffmt=1 --dcrt /dev/$1
+    echo "Starting format of sd$i"
+#done

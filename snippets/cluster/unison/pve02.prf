@@ -1,0 +1,17 @@
+# Roots of the synchronization
+root =  /data
+root = ssh://pve02//data
+
+ignore = Path */download*
+ignore = Path */media*
+
+auto = true
+batch=true
+confirmbigdel=true
+fastcheck=false
+group=true
+owner=true
+prefer=newer
+silent=false
+times=true
+repeat=watch

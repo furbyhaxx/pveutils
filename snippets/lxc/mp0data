@@ -1,0 +1,42 @@
+#!/bin/bash
+
+hostnameParam=$(cat /etc/pve/lxc/$1.conf | grep -i -m1 "hostname")
+
+#echo $hostnameParam
+
+IN="$hostnameParam"
+arrIN=(${IN//;/ })
+hostnameFull=${arrIN[1]}
+hostname=${hostnameFull//[[:digit:]]/} 
+
+DIR="/data/$hostname"
+if [ ! -d "$DIR" ]; then
+  # Take action if $DIR does not exists. #
+  echo "Creating folder ${DIR}..."
+  mkdir -p /data/$hostname
+  chmod -R 777 /data/$hostname
+#  echo "Mounting folder into ${1}:${hostname}"
+#  CFGFILE=/etc/pve/lxc/$1.conf
+#  echo -e "mp0: /data/$hostname/,mp=/data,backup=0,replicate=0,shared=1\n$(cat $CFGFILE)" > $CFGFILE
+#  cat >> /etc/pve/lxc/$1.conf <<EOL
+#mp0: /data/$hostname/,mp=/data,backup=0,replicate=0,shared=1
+#EOL
+else
+  echo "ct ${1}:${hostnameFull} folder already exists"
+fi
+
+if grep -Fxq "/data" /etc/pve/lxc/$1.conf
+then
+  # code if found
+  echo "ct ${1}:${hostnameFull} mp0 already exists"
+else
+  # code if not found
+  CFGFILE=/etc/pve/lxc/$1.conf
+  echo -e "mp0: /data/$hostname/,mp=/data,backup=0,replicate=0,shared=1\n$(cat $CFGFILE)" > $CFGFILE
+  echo "ct ${1}:${hostnameFull} mp0 mounted to /data/$hostname"
+fi
+
+
+#cat >> /etc/pve/lxc/$1.conf <<EOL
+#mp0: /data/$hostname/,mp=/data,backup=0,replicate=0,shared=1
+#EOL

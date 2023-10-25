@@ -1,0 +1,17 @@
+[Unit]
+Description=Sync-Data
+Documentation=/root/bin/sync-data.sh
+After=network.target
+
+[Service]
+# Create this user by running: adduser --system --group nzbhydra
+User=root
+Group=root
+Type=simple
+# Set to the folder where you extracted the ZIP
+WorkingDirectory=/root/bin
+ExecStart=/root/bin/sync-data.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

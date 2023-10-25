@@ -1,0 +1,12 @@
+#!/bin/bash
+
+IN=$(lsblk | grep -i 0B)
+
+#IN="$hostnameParam"
+arrIN=(${IN//;/ })
+#hostnameFull=${arrIN[1]}
+
+for key in "${!arrIN[@]}"
+do
+  echo "Key is '$key'  => Value is '${arrIN[$key]}'"
+done
