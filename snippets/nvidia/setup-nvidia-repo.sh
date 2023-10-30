@@ -17,7 +17,7 @@ echo "> Pin Cuda Repository."
 cat <<EOF | tee /etc/apt/preferences.d/priority-nvidia
 Package: *
 Pin: release o=NVIDIA,l=NVIDIA CUDA
-Pin-Priority: 100
+Pin-Priority: 1000
 EOF
 echo
 
