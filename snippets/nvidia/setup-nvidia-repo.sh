@@ -64,6 +64,16 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/cu
 LD_LIBRARY_PATH="/usr/local/cuda/lib64"
 echo
 
+echo "> Set environment variables."
+cat <<EOF | tee /etc/profile.d/cuda-path.sh
+#!/bin/bash
+export PATH="$PATH:/usr/local/cuda/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
+echo
+
+sudo chmod +x /etc/profile.d/cuda-path.sh
+
+
 
 echo "Done"
 
